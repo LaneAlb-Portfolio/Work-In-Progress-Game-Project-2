@@ -22,11 +22,10 @@ public class LapTimeManager : MonoBehaviour
     {
         msCount += Time.deltaTime * 10;
         rawTime += Time.deltaTime * 10;
-
-        msDisplay = msCount.ToString("F0"); //format ms by cutting off double digits
+        msDisplay = msCount.ToString("F0");
         msObj.GetComponent<Text>().text = "" + msDisplay;
 
-        //Time output and Time Formatting to UI management
+        //Time output to UI management
         if(msCount >= 10)
         {
             msCount = 0;

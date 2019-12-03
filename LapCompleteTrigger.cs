@@ -14,10 +14,21 @@ public class LapCompleteTrigger : MonoBehaviour
     public GameObject secDisplay;
     public GameObject msDisplay;
     public GameObject lapCounter;
+    public GameObject raceFinishObj;
 
     //variables
     public int lapsCounter;
-    public float currRawTime; //currently finished lap Time
+    public float currRawTime;
+
+    void Update()
+    {
+        if (lapsCounter == 2)   //hard code number of laps required
+        {
+            raceFinishObj.SetActive(true);
+        }
+    }
+
+
 
     void OnTriggerEnter()
     {//IF TIME OPTIMIZE BELOW
