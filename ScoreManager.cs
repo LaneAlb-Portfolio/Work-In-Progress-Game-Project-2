@@ -6,18 +6,49 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    //Defaults
-    public int life = 100;
-    //GUI Variables
-    public Text lifeTxt;
+    //Unity & GUI Variables
+    public GameObject PlayerCar;
 
-    public void LoseLife(int l = 10) //for player being hit by towers
+    public Text moneyText;
+
+    //Defaults
+    //public int life;
+    int currMoney;
+    void Start() //initialize money and stuff
     {
-        life -= l;
+        //initialize money and HuD
+        currMoney = PlayerCar.GetComponent<Player>().money;
+        moneyText.text = "$" + currMoney.ToString();
+    }
+    /*
+    public void setLife(int loss) //for player being hit by towers
+    {
+        life -= loss;
         if(life <= 0)
         {
             GameOver();
         }
+        lifeTxt.text = "Life: " + life.ToString(); //update life when taking damage
+    }
+    */
+    public void decMoney(int reduction)
+    {
+        //update money values
+        PlayerCar.GetComponent<Player>().money -= reduction; //set player money
+        currMoney = PlayerCar.GetComponent<Player>().money; //set local money variable
+
+        //update HuD
+        moneyText.GetComponent<Text>().text = "$" + currMoney.ToString("F0");
+    }
+
+    public void incMoney(int increase)
+    {
+        //update money values
+        PlayerCar.GetComponent<Player>().money += increase; //set player money
+        currMoney = PlayerCar.GetComponent<Player>().money; //set local money variable
+
+        //update HuD
+        moneyText.GetComponent<Text>().text = "$" + currMoney.ToString("F0");
     }
 
     public void GameOver()
@@ -26,9 +57,4 @@ public class ScoreManager : MonoBehaviour
         //Send to Game Over Screen instead of debug
     }
 
-    void Update()
-    {
-        //Fix: update at a slower pace 1-per-frame is excessive
-        lifeTxt.text = "Life: " + life.ToString();
-    }
 }

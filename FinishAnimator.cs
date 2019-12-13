@@ -11,8 +11,3 @@ public class FinishAnimator : MonoBehaviour
         transform.Rotate(0, 1, 0, Space.World);
     }
 }
-
-//change CarController Variable : private static float m_Topspeed
-// to public static float m_Topspeed
-
-

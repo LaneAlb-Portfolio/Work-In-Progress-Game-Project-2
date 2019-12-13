@@ -6,16 +6,25 @@ using UnityEngine.UI;
 
 public class BuildingManager : MonoBehaviour
 {
-    public GameObject towerToGoHere;
+    //get Tower to manage
+    public GameObject TowerToManage;
+    public GameObject PlayerCar;
+    public GameObject ScoreManager;
+    public GameObject ScrollingTxtObj;
 
-    void Start()
-    {   }
-    void Update()
-    {   }
-    //lets multi towers go whereever (How to put in our context dunno yet)
-    //keybind to send prefab to this??
-    public void SelectTowerType(GameObject Tprefab)
+    void OnTriggerEnter() //when player enters under tower, Spawn tower and enable it to shoot if they  have money to build
     {
-        towerToGoHere = Tprefab;
+        if (PlayerCar.GetComponent<Player>().money >= TowerToManage.GetComponent<ModularTower>().towerValue)
+        {
+            //Place and Activate Tower
+            TowerToManage.GetComponent<ModularTower>().enabled = true;
+            ScrollingTxtObj.GetComponent<ScrollingText>().TowerBuilt(); //call scrolling text for tower built
+            //Update Player Money and HuD
+            ScoreManager.GetComponent<ScoreManager>().decMoney(TowerToManage.GetComponent<ModularTower>().towerValue);
+
+            //Output To Text Chat that tower was built
+        }
+        else
+            return;//output not enough money to text chat
     }
 }

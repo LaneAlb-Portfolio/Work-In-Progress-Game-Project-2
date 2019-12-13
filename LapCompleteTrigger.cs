@@ -15,20 +15,20 @@ public class LapCompleteTrigger : MonoBehaviour
     public GameObject msDisplay;
     public GameObject lapCounter;
     public GameObject raceFinishObj;
+    public GameObject ScoreManager;
 
     //variables
     public int lapsCounter;
     public float currRawTime;
+    public int moneyUponLapComplete;
 
     void Update()
     {
-        if (lapsCounter == 2)   //hard code number of laps required
+        if (lapsCounter == 2)   //hard code (number of laps required - 1)
         {
             raceFinishObj.SetActive(true);
         }
     }
-
-
 
     void OnTriggerEnter()
     {//IF TIME OPTIMIZE BELOW
@@ -70,6 +70,8 @@ public class LapCompleteTrigger : MonoBehaviour
 
         //increase lap counter upon finished lap
         lapCounter.GetComponent<Text>().text = "" + lapsCounter;
+        //award player money for lap complete
+        ScoreManager.GetComponent<ScoreManager>().incMoney(moneyUponLapComplete);
 
         //reset lap trigger
         HalfLapObj.SetActive(true);

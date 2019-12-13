@@ -19,6 +19,7 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         //travel 
         Vector3 dir = target.position - this.transform.localPosition;
 
@@ -45,12 +46,13 @@ public class Bullet : MonoBehaviour
         } //if opponents don't die in a radius chk Kinematic Rigidbody && collider in range
         else
         {
-            Collider[] c = Physics.OverlapSphere(transform.position, radius);
+            Collider[] c = Physics.OverlapSphere(transform.position, radius); //parent objects must have colliders for it to register
             
             foreach(Collider clld in c)
             {
                 Opponent e = clld.GetComponent<Opponent>();
-                if(e != null)
+               
+                if (e != null)
                 { // falloff dmg is possible here
                     e.GetComponent<Opponent>().TakeDamage(dmg);
                 }
